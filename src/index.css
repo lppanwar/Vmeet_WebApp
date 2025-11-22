@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+
+*{
+  font-family: Outfit;
+}
+
+/* 🎨 Define your theme first */
+@theme {
+  --color-primary: #5f6fff;
+    --grid-auto: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* 🧱 Then write your custom rules */
+.active hr {
+  @apply block;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
