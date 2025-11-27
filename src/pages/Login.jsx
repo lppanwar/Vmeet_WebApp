@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const Login = () => {
 
-  const [state, setState] = ('Sign up');
+  const [state, setState] = useState('sign up');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,29 +10,37 @@ const Login = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    if (state === "Sign up") {
+      console.log("SIGN UP DATA:", name, email, password);
+    } else {
+      console.log("LOGIN DATA:", email, password);
+    }
   }
 
   return (
-
-    <form className='min-h-[80vh] flex items-center '>
-
-      <div>
-        <p>{state === 'Sign up' ? "Create Account" : "Login"}</p>
+    <form className='min-h-[80vh] flex items-center' onSubmit={onSubmitHandler}>
+      <div className='flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border-xl text-zinc-600 text-sm shadow-lg'>
+        <p className='text-2xl font-semibold'>{state === 'Sign up' ? "Create Account" : "Login"}</p>
         <p>please {state === ' Sign up ' ? " Sign up" : "log in "} to book Appointment </p>
-
-        <div>
-          <p> Full Name   </p>
-          <input type="text" onChange={(e) => setName(e.target.name)} value={name} required />
-        </div>
-        <div>
+        {
+          state === 'Sign up' && <div className='w-full'>
+            <p> Full Name   </p>
+            <input className='border border-zinc-300 rounded w-full p-2 mt-1' type="name" onChange={(e) => setName(e.target.value)} value={name} required />
+          </div>
+        }
+        <div className='w-full'>
           <p> Email   </p>
-          <input type="Email" onChange={(e) => setName(e.target.name)} value={name} required />
+          <input className='border border-zinc-300 rounded w-full p-2 mt-1' type="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
         </div>
-        <div>
+        <div className='w-full'>
           <p> Password  </p>
-          <input type="Password" onChange={(e) => setName(e.target.name)} value={name} required />
+          <input className='border border-zinc-300 rounded w-full p-2 mt-1' type="Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
         </div>
-        <button>{state === 'Sign up' ? "Create Account" : "Login"}</button>
+        <button className='bg-primary text-white w-full py-2 rounded-md text-base'>{state === 'Sign up' ? "Create Account" : "Login"}</button>
+        {
+          state === 'Sign up' ? <p> Already have an account? <span className='text-primary cursor-pointer' onClick={() => setState('Login')}> Login </span> </p> :
+            <p> Don't have an account? <span className='text-primary cursor-pointer' onClick={() => setState('Sign up')}> Sign up </span> </p>
+        }
       </div>
     </form>
   )
